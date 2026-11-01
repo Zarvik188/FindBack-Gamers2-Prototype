@@ -1,0 +1,335 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>拾光 FindBack 原型设计博客初版</title><style>body{font:16px/1.9 "Microsoft YaHei",sans-serif;max-width:1040px;margin:45px auto;padding:0 24px;color:#253247;background:#f4f6f8}h1,h2,h3{color:#253247;line-height:1.5}h2{margin-top:45px}a{color:#2b5d92}img{display:block;max-width:100%;height:auto;margin:22px auto;border:1px solid #dce2e8;border-radius:10px}table{border-collapse:collapse;width:100%;background:white;font-size:14px}td,th{border:1px solid #dce2e8;padding:10px;text-align:left}th{background:#edf3f8}blockquote{border-left:4px solid #829eb9;margin:25px 0;padding:12px 20px;background:#edf3f8}code{background:#edf1f5;padding:2px 5px}pre{overflow:auto;background:#edf1f5;padding:15px}.toc{padding:20px;background:#edf3f8}</style><body><h1 id="gamers2-findback">Gamers2｜拾光 FindBack 原型设计</h1>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>课程</td>
+<td><a href="https://bbs.csdn.net/forums/2601_MU_SE_FZU">EE308FZ Software Engineering 2026 Fall</a></td>
+</tr>
+<tr>
+<td>作业要求</td>
+<td><a href="https://bbs.csdn.net/topics/620556488">Prototype Design 作业说明</a></td>
+</tr>
+<tr>
+<td>团队</td>
+<td>Gamers2，课程第 4 组，14 名成员</td>
+</tr>
+<tr>
+<td>项目</td>
+<td>拾光 FindBack · 校园失物招领基础版</td>
+</tr>
+<tr>
+<td>团队账号</td>
+<td><a href="https://blog.csdn.net/2603_97191685">Gamers_2</a></td>
+</tr>
+<tr>
+<td>本次目标</td>
+<td>使用专用原型工具设计可操作流程，展示设计过程、困难与解决情况，并形成答辩材料</td>
+</tr>
+<tr>
+<td>原型工具</td>
+<td>墨刀：正式页面内嵌 HTML 交互组件，使用模拟数据</td>
+</tr>
+<tr>
+<td>截止时间</td>
+<td>2026 年 11 月 1 日 23:59（教师通知）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>本文为提交前初版。真实讨论照片、成员本次实际贡献和个人感受仍需团队补齐，公开源码与 PPT/PDF 地址已列在第 2 节。正文中的截图来自课程演示系统，物品与身份均为示例。</p>
+</blockquote>
+<h2 id="_1">目录</h2>
+<div class="toc">
+<ul>
+<li><a href="#gamers2-findback">Gamers2｜拾光 FindBack 原型设计</a><ul>
+<li><a href="#_1">目录</a></li>
+<li><a href="#1">1 项目延续与本次范围</a></li>
+<li><a href="#2">2 原型与附件入口</a></li>
+<li><a href="#3">3 用户角色与主流程</a></li>
+<li><a href="#4">4 页面设计与交互细节</a><ul>
+<li><a href="#41">4.1 首页与搜索</a></li>
+<li><a href="#42">4.2 物品详情与认领</a></li>
+<li><a href="#43">4.3 发布与内容审核</a></li>
+<li><a href="#44">4.4 人工核验与双向交接</a></li>
+<li><a href="#45">4.5 消息中心</a></li>
+</ul>
+</li>
+<li><a href="#5">5 设计过程、困难与解决情况</a></li>
+<li><a href="#6">6 前后端实现与验证</a></li>
+<li><a href="#7">7 团队分工、贡献与进度</a><ul>
+<li><a href="#71">7.1 本次任务安排草案</a></li>
+<li><a href="#72">7.2 当前产物与提交安排</a></li>
+</ul>
+</li>
+<li><a href="#8">8 讨论照片、感受与成员评价（提交前必补）</a></li>
+<li><a href="#9">9 答辩演示与提交检查</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="1">1 项目延续与本次范围</h2>
+<p>本次继续做校园失物招领系统。原型包含发布、查找、认领申请、拾主核验和双方确认。先把这几个操作做完整，再考虑图像匹配等扩展功能。</p>
+<p>早期需求规格说明书还规划了图像候选匹配、小程序和校园认证。本次先实现清晰、可验证的基础流程，没有把这些规划能力写成已经完成。图像匹配只应帮助发现候选物品，不能代替私密证据的人工判断。</p>
+<p>本次还完成了前后端演示实现：浏览器页面通过 HTTP API 读写数据库。它用来验证原型中的状态和权限能否实际落地，不代表已经开展校园试点或完成原 SRS 的全部需求。</p>
+<h2 id="2">2 原型与附件入口</h2>
+<ul>
+<li><strong><a href="https://modao.cc/proto/mZBdN92Gtntbi9MCoK4oiE/sharing?view_mode=device&amp;screen=rbpVZhjdku4xrr7am&amp;canvasId=rcVZhmZ6fw9Zfa16">打开墨刀交互原型，答辩主入口</a></strong></li>
+<li><a href="https://modao.cc/proto/design/pb2mvxifnjjqt5ecl">墨刀编辑项目</a>：需要项目权限。</li>
+<li><a href="https://findback-gamers2.x1013956.chatgpt.site">前后端演示站</a>：当前账号私有，课堂优先演示上方墨刀原型或本地系统。</li>
+<li><strong><a href="https://github.com/Zarvik188/FindBack-Gamers2-Prototype/raw/refs/heads/main/deliverables/FindBack-Prototype.pptx">下载 PPT（配图版·链接修正版）</a></strong>：第 1、11 页可点击墨刀链接。</li>
+<li><a href="https://github.com/Zarvik188/FindBack-Gamers2-Prototype/blob/main/deliverables/FindBack-Prototype.pdf">查看 PDF 备用稿</a>。</li>
+<li><a href="https://github.com/Zarvik188/FindBack-Gamers2-Prototype">GitHub 公共源码仓库</a>；<a href="https://github.com/Zarvik188/FindBack-Gamers2-Prototype/archive/refs/heads/main.zip">全部源码 ZIP</a>。</li>
+</ul>
+<p>原型分享面板当前显示访问权限为“所有人”。墨刀原型使用独立模拟数据，刷新会重置；实际前后端使用持久化数据库，两者用途不同。墨刀的 HTML 组件支持导入页面并保留交互，设计源文件随源码一同归档，可参考<a href="https://modao.cc/feature/html-editor/">墨刀官方 HTML 导入说明</a>。本次没有将所有控件转换成独立的墨刀原生图层。</p>
+<h2 id="3">3 用户角色与主流程</h2>
+<table>
+<thead>
+<tr>
+<th>用户</th>
+<th>主要任务</th>
+<th>操作后应看到什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>访客</td>
+<td>浏览、搜索、筛选已公开的物品</td>
+<td>结果列表、空结果说明和详情入口</td>
+</tr>
+<tr>
+<td>失主</td>
+<td>发布寻物、提交认领、确认收取</td>
+<td>申请状态、核验结论与交接进度</td>
+</tr>
+<tr>
+<td>拾主</td>
+<td>发布拾物、核对私密证据、确认交出</td>
+<td>本人发布、认领申请与确认状态</td>
+</tr>
+<tr>
+<td>内容管理员</td>
+<td>审核公开文字与图片</td>
+<td>待审核内容、审核操作和通知反馈</td>
+</tr>
+</tbody>
+</table>
+<p>正常认领流程为：浏览与筛选 → 查看物品详情 → 提交私密特征 → 拾主人工作出核验结论 → 双方交接 → 拾主确认交出、失主确认收到 → 已归还。</p>
+<p>公开内容审核与认领核验使用不同状态。前者决定信息能否出现在广场，后者判断一次认领是否通过。只有一方确认时仍处于“交接中”；双方均确认，物品才进入“已归还”。</p>
+<h2 id="4">4 页面设计与交互细节</h2>
+<h3 id="41">4.1 首页与搜索</h3>
+<p>首页右上方提供“发布寻物”和“发布招领”，下方是搜索与筛选；列表展示标题、地点、日期和业务状态。用户可组合关键词、信息类型、类别、地点和状态筛选，并用“清除筛选”回到完整列表。空结果提供明确提示，避免让用户误以为页面加载失败。</p>
+<p><img alt="失物广场：搜索与组合筛选" src="assets/01-home.jpg" /></p>
+<p>页面采用浅色背景、低饱和绿色按钮与图片卡片，首页保留搜索、筛选和发布入口，没有大幅宣传区。六件示例物品配有内置生图工具生成的示例图片，卡片和详情页均有标注，不代表真实失物照片；其他未上传照片的记录仍显示“暂无照片”。状态同时用文字说明。</p>
+<h3 id="42">4.2 物品详情与认领</h3>
+<p>详情公开物品的基本信息和核验问题，但不公开拾主的私密参考答案。申请者通过弹窗描述公开图片中看不到的细节。证据只对申请者与本帖拾主显示，后台内容审核不因此获得全部私密认领证据。</p>
+<p><img alt="认领表单：描述未公开细节" src="assets/03-claim-form.jpg" /></p>
+<p>重复提交会被限制；申请提交后，按钮显示等待状态，页面保留申请进度。核验未通过时记录原因，申请者可以修正证据后重新申请。</p>
+<h3 id="43">4.3 发布与内容审核</h3>
+<p>发布页区分公开描述、核验问题和私密参考信息。文字字段有长度及日期校验，公开文本限制直接填写手机号；上传图片在前端压缩后提交，图片中的信息由管理员人工审核。提交后显示“待审核”，只有审核通过才进入公共列表。</p>
+<p><img alt="发布页：公开和私密信息分栏" src="assets/08-publish.jpg" /></p>
+<p>这套检查不能保证自动识别所有个人信息，因此演示环境不使用真实证件或联系方式。审核意见会形成站内通知，让发布者知道下一步如何处理。</p>
+<h3 id="44">4.4 人工核验与双向交接</h3>
+<p>拾主可以看到本人保存的核验参考信息和申请者证据，并记录核验结论。通过后进入交接，不能直接将物品标为归还。界面分别显示“拾主确认交出”和“失主确认收取”，让双方知道还缺哪一步。</p>
+<p><img alt="拾主核验：参考信息与申请分开展示" src="assets/04-owner-review.jpg" /></p>
+<p><img alt="双方确认后显示已归还" src="assets/06-returned.jpg" /></p>
+<h3 id="45">4.5 消息中心</h3>
+<p>新申请、审核结论和交接变化通过站内消息反馈，消息链接回到对应物品。通知按当前用户隔离，支持标记已读。本次没有接入微信、短信或邮件。</p>
+<p><img alt="站内通知" src="assets/07-notices.jpg" /></p>
+<h2 id="5">5 设计过程、困难与解决情况</h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>尝试与调整</th>
+<th>当前结果与收获</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从完整 SRS 直接做原型，范围过大</td>
+<td>先锁定基础版，将图像匹配和小程序留在后续迭代</td>
+<td>主流程可独立演示，范围边界更清晰</td>
+</tr>
+<tr>
+<td>容易把内容审核和认领核验混在一起</td>
+<td>分别设计审核状态、认领状态和物品状态</td>
+<td>页面和服务端采用一致的状态含义</td>
+</tr>
+<tr>
+<td>核验答案出现在公共页面会失去验证作用</td>
+<td>将公开问题、拾主参考答案、申请者证据拆开，并测试各角色读取权限</td>
+<td>公开页面不返回参考答案，私密证据按角色隔离</td>
+</tr>
+<tr>
+<td>单方点击就标记归还，无法反映真实交接</td>
+<td>使用两个独立确认标记，后端检查双方状态</td>
+<td>单方确认仍显示交接中，双方确认才归还</td>
+</tr>
+<tr>
+<td>墨刀原生图层转换等待较长</td>
+<td>使用官方 HTML 导入组件，并将组件放入正式页面后再打开分享预览</td>
+<td>已验证分享预览中的身份切换、详情跳转和认领提交；原生图层转换未作为已完成成果</td>
+</tr>
+<tr>
+<td>原型中的状态变化是否可实际保存</td>
+<td>同步实现 HTTP API 与数据库，使用接口测试和浏览器操作验证</td>
+<td>本地系统刷新后保留交接与发布记录；原型模拟数据刷新重置</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6">6 前后端实现与验证</h2>
+<p>前端采用 HTML、CSS 和 JavaScript；本地后端采用 Node.js HTTP 服务、共享业务模块与 SQLite。云端部署复用同一业务模块，适配 Workers/D1。此基础版技术栈与早期 SRS 的 Java/Spring Boot 计划存在调整，后续应在团队评审后更新相应技术文档。</p>
+<p>已实现账号登录、发布、筛选搜索、详情、认领、人工审核、双向交接、通知和内容审核。会话与权限在服务端检查，数据库使用参数绑定；密码带盐哈希保存。示例角色切换用于课堂演示，不代表校园身份认证。</p>
+<p>验证结果：18 项接口测试全部通过，覆盖匿名与越权请求、私密字段隔离、审核后公开、重复认领、竞争申请只批准一条、双方确认、通知隔离、会话及数据库重开等情形。本地 D1 浏览器操作完成了认领至归还的全流程，并提交了一条笔袋信息，刷新后仍可读取。云端构建和发布成功，当前保持账号私有权限。</p>
+<p>这些验证不包含真实校园用户研究、压力测试、图像匹配准确率或生产运行指标，不能据此宣称原 SRS 的性能目标已经达到。</p>
+<h2 id="7">7 团队分工、贡献与进度</h2>
+<h3 id="71">7.1 本次任务安排草案</h3>
+<p>成员与角色沿用已有组队材料。下表是便于团队确认的本次任务分配建议，不能替代实际工作记录；个人完成情况和贡献比例需要提交前逐项核实。</p>
+<table>
+<thead>
+<tr>
+<th>学号</th>
+<th>成员（沿用原材料姓名拼写）</th>
+<th>本次建议负责范围</th>
+<th>实际贡献</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>832401315</td>
+<td>Sun Zikun</td>
+<td>范围、排期、评审和交付汇总</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401313</td>
+<td>Luo Yuhan</td>
+<td>接口、部署与交付归档</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401329</td>
+<td>Zhou Debin</td>
+<td>角色场景与需求追踪</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401327</td>
+<td>Zheng Ziyang</td>
+<td>业务规则与异常路径</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401223</td>
+<td>Wu Junjia</td>
+<td>原型视觉和布局评审</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401328</td>
+<td>Zheng Zongyuan</td>
+<td>广场与搜索交互评审</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401230</td>
+<td>Zuo Xiangrong</td>
+<td>详情、认领交互评审</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401210</td>
+<td>Li Jianhang</td>
+<td>发布与消息交互评审</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401213</td>
+<td>Liu Peikun</td>
+<td>发布与内容审核接口评审</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401317</td>
+<td>Wang Qiushi</td>
+<td>认领与状态规则评审</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401318</td>
+<td>Xiao Zhengyu</td>
+<td>会话、通知和权限评审</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401212</td>
+<td>Liu Junye</td>
+<td>图像匹配后续范围与接口规划</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401319</td>
+<td>Xu Yichao</td>
+<td>正常流程和异常验收</td>
+<td>待确认</td>
+</tr>
+<tr>
+<td>832401330</td>
+<td>Zhou Shengdong</td>
+<td>页面兼容、演示与材料一致性检查</td>
+<td>待确认</td>
+</tr>
+</tbody>
+</table>
+<p>贡献比例应按实际完成记录核算，14 人合计为 100%；不能套用上次作业或把任务安排直接写成个人成果。</p>
+<h3 id="72">7.2 当前产物与提交安排</h3>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>产物</th>
+<th>当前状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>范围整理</td>
+<td>基础版流程、角色与能力边界</td>
+<td>已形成，待团队评审</td>
+</tr>
+<tr>
+<td>原型制作</td>
+<td>墨刀交互组件与正式分享页面</td>
+<td>已建立并进行操作验证</td>
+</tr>
+<tr>
+<td>实现验证</td>
+<td>前后端源码、数据库、18 项接口测试、实际页面截图</td>
+<td>已形成</td>
+</tr>
+<tr>
+<td>材料整理</td>
+<td>本文、答辩 PPT/PDF 与演示操作说明</td>
+<td>初版</td>
+</tr>
+<tr>
+<td>提交前核实</td>
+<td>真实分工、贡献、讨论照片、个人感受、附件公开地址</td>
+<td>待团队完成</td>
+</tr>
+</tbody>
+</table>
+<p>建议协作时以“页面/流程、发现的问题、负责人、修订结果”为记录单位，博客和 PPT 使用同一份入口与能力清单。当前未提供可核实的团队会议、提交或评审记录，不能补写成已发生的协作历史。</p>
+<h2 id="8">8 讨论照片、感受与成员评价（提交前必补）</h2>
+<p>【插入本次真实、非摆拍的团队讨论照片，并说明讨论的具体问题、日期和地点。不要用系统截图或生成图片替代。】</p>
+<p>例如，拾主点击了“交出物品”，失主还没有确认收到，这时应保留“交接中”。实际检查时还发现，双方已经确认后，一处旧提示仍写着等待完成，现已与物品状态统一。后续评审会继续检查核验失败、单方确认和重复申请等情况。</p>
+<p>【以下内容由成员根据真实经历填写：各人解决了什么问题、参考了谁的意见、仍有什么不足，以及对其他成员工作的具体评价。上段是设计复盘，不是已收集的成员访谈或感受。】</p>
+<h2 id="9">9 答辩演示与提交检查</h2>
+<p>答辩时直接点击 PPT 中的墨刀链接：先浏览和筛选，再以失主身份申请认领，切换拾主核验，分别完成双方确认，最后查看消息。不要只展示截图。原型刷新会重置模拟数据，适合重新演练；本地实际系统的数据会保留。</p>
+<p>提交前检查：原型链接在另一台电脑能打开；检查第 2 节 GitHub 公共仓库、PPT/PDF 与源码下载地址可免登录打开；真实讨论照片、个人完成情况和贡献比例已补齐；图片已上传到 CSDN 图床并替换本文相对路径；博客发布后检查目录、图片和链接。</p></body></html>
