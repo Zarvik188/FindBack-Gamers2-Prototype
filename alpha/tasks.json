@@ -65,11 +65,13 @@
     "points": 3,
     "target": "2026-11-24",
     "owners": "Wu Junjia / Zheng Zongyuan / Zhou Shengdong",
-    "status": "planned",
+    "status": "done",
     "scope": "复核登录弹窗、表单、详情与 390px 屏幕操作。",
     "acceptance": "提交实际复核清单，发现问题则修复并留截图，开发改动须有 commit。",
     "issue": "https://github.com/Zarvik188/FindBack-Gamers2-Prototype/issues/6",
-    "issue_number": 6
+    "issue_number": 6,
+    "observed_date": "2026-11-21",
+    "evidence": "extended/extended-ui-report.json"
   },
   {
     "id": "A07",
@@ -77,11 +79,13 @@
     "points": 3,
     "target": "2026-11-24",
     "owners": "Li Jianhang / Zheng Ziyang / Xiao Zhengyu",
-    "status": "planned",
+    "status": "done",
     "scope": "检查非法输入、审核拒绝、空消息和会话失效后的反馈。",
     "acceptance": "逐项记录触发、预期和实际，不用空泛完成描述。",
     "issue": "https://github.com/Zarvik188/FindBack-Gamers2-Prototype/issues/7",
-    "issue_number": 7
+    "issue_number": 7,
+    "observed_date": "2026-11-21",
+    "evidence": "extended/extended-ui-report.json"
   },
   {
     "id": "A08",
@@ -89,11 +93,13 @@
     "points": 3,
     "target": "2026-11-26",
     "owners": "Wang Qiushi / Zuo Xiangrong / Liu Peikun",
-    "status": "planned",
+    "status": "done",
     "scope": "扩展多申请者、重复提交、单方及反向确认的场景。",
     "acceptance": "本机实际执行并补测试；并发或跨环境结论须有对应实验。",
     "issue": "https://github.com/Zarvik188/FindBack-Gamers2-Prototype/issues/8",
-    "issue_number": 8
+    "issue_number": 8,
+    "observed_date": "2026-11-21",
+    "evidence": "extended/api-tests-29.tap"
   },
   {
     "id": "A09",

@@ -1,5 +1,8 @@
 {
-  "commit": "221c212e6b5c27d4d35bf40c48ac901e53e110cf",
+  "commit": "3e9d1292a3df4d30440ce550a7b6e62430562571",
   "baseline": "6cca27683c353d6a60f9bc3ee4e2e044d4ce9d13",
-  "description": "pagination fix, 8 API regressions, 6 browser checks and CI configuration"
+  "tests": 29,
+  "browserChecks": 15,
+  "ci": "https://github.com/Zarvik188/FindBack-Gamers2-Prototype/actions/runs/44918314810",
+  "conclusion": "success"
 }

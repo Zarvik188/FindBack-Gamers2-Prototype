@@ -1,0 +1,32 @@
+const {chromium}=require(process.env.FINDBACK_PLAYWRIGHT_MODULE);
+const {spawn}=require('node:child_process');
+const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'../..'),out=path.join(root,'alpha/evidence/2026-11-21/extended');fs.mkdirSync(out,{recursive:true});
+const temp=fs.mkdtempSync(path.join(os.tmpdir(),'findback-ui-'));
+const server=spawn(process.execPath,['backend/server.mjs'],{cwd:root,env:{...process.env,PORT:'5188',FINDBACK_DB:path.join(temp,'test.db')},windowsHide:true,stdio:'pipe'});
+let browser;const checks=[];
+async function main(){
+ await new Promise((ok,no)=>{server.stdout.once('data',ok);server.once('error',no)});
+ browser=await chromium.launch({headless:true,executablePath:process.env.FINDBACK_BROWSER_EXECUTABLE});const page=await browser.newPage({viewport:{width:1440,height:1000}});const base='http://127.0.0.1:5188';
+ const check=async(name,fn)=>{await fn();checks.push({name,result:'passed'});};
+ const role=async(persona)=>{await page.locator('[data-action="auth"]').first().click();await page.locator(`[data-persona="${persona}"]`).click();await page.locator('#auth-dialog').waitFor({state:'hidden'});};
+ const shot=async(name)=>{await page.locator('#toast.visible').waitFor({state:'hidden'});await page.screenshot({path:path.join(out,name),fullPage:true});};
+ await page.goto(base);await page.locator('[data-action="auth"]').waitFor();
+ await check('Keyboard opens login and Escape closes the modal',async()=>{await page.locator('[data-action="auth"]').focus();await page.keyboard.press('Enter');await page.locator('#auth-dialog').waitFor({state:'visible'});await page.keyboard.press('Escape');await page.locator('#auth-dialog').waitFor({state:'hidden'});});
+ await role('owner');await page.goto(base+'/#/publish/found');await page.locator('#publish-form').waitFor();
+ await check('Required title field blocks empty submission in the browser',async()=>{await page.locator('#publish-form button[type="submit"]').click();assert.equal(await page.locator('[name="title"]').evaluate(el=>el.validity.valueMissing),true);assert.equal(await page.locator('#publish-form').count(),1);});
+ await page.locator('[name="title"]').fill('图书馆的蓝色测试文件袋');await page.locator('[name="category"]').selectOption('书籍文具');await page.locator('[name="place"]').selectOption('图书馆');await page.locator('textarea[name="description"]').fill('二楼座位拾到的课程测试文件袋，仅用于验收。');await page.locator('[name="question"]').fill('文件袋内有什么标记？');await page.locator('[name="private_note"]').fill('内页写着教学测试标记');
+ await page.locator('#publish-form button[type="submit"]').click();await page.getByRole('heading',{name:'图书馆的蓝色测试文件袋',exact:true}).waitFor();
+ const id=page.url().split('/').pop();
+ await check('Publication remains pending before content moderation',async()=>{await page.getByText('内容待审核',{exact:true}).waitFor();});await shot('07-pending.png');
+ await role('admin');await page.goto(base+'/#/admin');await page.locator(`[data-action="moderate"][data-id="${id}"][data-decision="rejected"]`).click();await page.locator('#moderate-form textarea').fill('演示拒绝场景：请补充清晰的物品说明后重新核对');await page.locator('#moderate-form button').click();await page.locator('#action-dialog').waitFor({state:'hidden'});
+ await check('Rejected content is absent from the anonymous catalogue',async()=>{const fresh=await browser.newContext();const response=await fresh.request.get(base+'/api/items?q='+encodeURIComponent('蓝色测试文件袋'));assert.equal((await response.json()).total,0);await fresh.close();});
+ await role('owner');await page.goto(base+'/#/messages');await check('Publisher receives the actual moderation rejection reason',async()=>{await page.getByText('演示拒绝场景：请补充清晰的物品说明后重新核对',{exact:true}).waitFor();});await shot('08-rejection-notice.png');
+ await role('claimant');await page.goto(base+'/#/messages');await check('Fresh claimant has an explicit empty-message state',async()=>{await page.getByText('还没有消息',{exact:true}).waitFor();});await shot('09-empty-messages.png');
+ await page.setViewportSize({width:390,height:844});await page.goto(base+'/#/publish/found');await page.locator('#publish-form').waitFor();await check('390px publication form has no horizontal overflow',async()=>assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)));await shot('10-mobile-publish.png');
+ await page.goto(base+'/#/item/demo-bag');await page.getByRole('heading',{name:'图书馆捡到一个绿色双肩包',exact:true}).waitFor();await check('390px item detail has no horizontal overflow',async()=>assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)));await shot('11-mobile-detail.png');
+ const {DatabaseSync}=require('node:sqlite');const fixture=new DatabaseSync(path.join(temp,'test.db'));fixture.exec("UPDATE sessions SET expires_at='2000-01-01T00:00:00.000Z'");fixture.close();
+ await page.goto(base+'/#/messages');await check('Expired browser session shows a fresh login action and explicit error',async()=>{await page.getByText('请先登录后再操作',{exact:true}).waitFor();await page.getByRole('button',{name:'登录 / 演示身份 ↗',exact:true}).waitFor();});await shot('12-expired-session.png');
+ const report={observedAt:new Date().toISOString(),tool:'Playwright Library + installed Microsoft Edge',browser:browser.version(),checks,limitations:['All checks executed on 2026-11-21, not future log dates','One Chromium-based browser only','No campus production or load test']};fs.writeFileSync(path.join(out,'extended-ui-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+}
+main().catch(e=>{console.error(e);process.exitCode=1}).finally(async()=>{if(browser)await browser.close();server.kill()});

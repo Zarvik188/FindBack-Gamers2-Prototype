@@ -1,0 +1,48 @@
+{
+  "observedAt": "2026-11-21T15:16:42.609Z",
+  "tool": "Playwright Library + installed Microsoft Edge",
+  "browser": "157.0.4341.60",
+  "checks": [
+    {
+      "name": "Keyboard opens login and Escape closes the modal",
+      "result": "passed"
+    },
+    {
+      "name": "Required title field blocks empty submission in the browser",
+      "result": "passed"
+    },
+    {
+      "name": "Publication remains pending before content moderation",
+      "result": "passed"
+    },
+    {
+      "name": "Rejected content is absent from the anonymous catalogue",
+      "result": "passed"
+    },
+    {
+      "name": "Publisher receives the actual moderation rejection reason",
+      "result": "passed"
+    },
+    {
+      "name": "Fresh claimant has an explicit empty-message state",
+      "result": "passed"
+    },
+    {
+      "name": "390px publication form has no horizontal overflow",
+      "result": "passed"
+    },
+    {
+      "name": "390px item detail has no horizontal overflow",
+      "result": "passed"
+    },
+    {
+      "name": "Expired browser session shows a fresh login action and explicit error",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "All checks executed on 2026-11-21, not future log dates",
+    "One Chromium-based browser only",
+    "No campus production or load test"
+  ]
+}

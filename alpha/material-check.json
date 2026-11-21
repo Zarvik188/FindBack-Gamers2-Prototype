@@ -3,12 +3,14 @@
   "local_blog_links": "all resolved",
   "required_headers": "all present",
   "scope_sp": 32,
-  "actual_first_day_sp": 14,
+  "actual_first_day_sp": 23,
   "future_actuals": "not populated",
-  "api_cases": 26,
-  "browser_checks": 6,
+  "api_cases": 29,
+  "browser_checks": 15,
   "ci": "success",
   "presentation_slides": 12,
   "csdn_published": false,
-  "course_submitted": false
+  "course_submitted": false,
+  "manuscripts": "four complete stage drafts and full summary",
+  "member_reflections": "role-based reference text awaiting member confirmation"
 }
