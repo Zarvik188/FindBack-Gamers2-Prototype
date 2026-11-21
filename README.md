@@ -2,6 +2,10 @@
 
 校园失物招领课程演示。原型使用墨刀；实际系统包含独立前端、HTTP API 和 SQLite 持久化。
 
+## α 冲刺（2026-11-21 首日版）
+
+[α 博客与证据](alpha/README.md)、[8 篇正文](alpha/blogs/01_博客总目录.md)、[12 项任务](https://github.com/Zarvik188/FindBack-Gamers2-Prototype/issues)。本轮新增分页修复和 8 项接口回归，现有 26 项接口测试通过，另有 6 项真实页面检查。后续日志和最终总结须按各期实际记录补齐；尚未代发布 CSDN 或提交课程作业页。
+
 ## 作业与公开附件
 
 - [教师原文：Prototype Design](https://bbs.csdn.net/topics/620556488)，截止 2026-11-01 23:59（北京时间）。

@@ -1,0 +1,5 @@
+{
+  "commit": "221c212e6b5c27d4d35bf40c48ac901e53e110cf",
+  "baseline": "6cca27683c353d6a60f9bc3ee4e2e044d4ce9d13",
+  "description": "pagination fix, 8 API regressions, 6 browser checks and CI configuration"
+}

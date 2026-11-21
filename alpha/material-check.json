@@ -1,0 +1,14 @@
+{
+  "blogs": 8,
+  "local_blog_links": "all resolved",
+  "required_headers": "all present",
+  "scope_sp": 32,
+  "actual_first_day_sp": 14,
+  "future_actuals": "not populated",
+  "api_cases": 26,
+  "browser_checks": 6,
+  "ci": "success",
+  "presentation_slides": 12,
+  "csdn_published": false,
+  "course_submitted": false
+}

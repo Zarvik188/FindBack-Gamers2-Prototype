@@ -1,0 +1,47 @@
+{
+  "id": 44895351654,
+  "url": "https://github.com/Zarvik188/FindBack-Gamers2-Prototype/actions/runs/44895351654",
+  "commit": "221c212e6b5c27d4d35bf40c48ac901e53e110cf",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "api",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check syntax",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run isolated API tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "observedAt": "2026-11-21T10:32:13.710Z",
   "timezone": "Asia/Shanghai",
-  "tool": "Playwright Chromium",
+  "tool": "Playwright Library + Microsoft Edge (Chromium)",
   "browserVersion": "157.0.4341.60",
   "viewport": "1440x1040 and 390x844",
   "checks": [
