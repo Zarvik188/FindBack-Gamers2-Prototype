@@ -94,3 +94,45 @@ test('A03: a failed batch rolls back every write in the transaction', async () =
     assert.deepEqual(await db.prepare('SELECT name FROM users WHERE id=?').bind('demo-owner').first(), before);
   });
 });
+
+test('A08: applicant-first confirmation and repeat confirmations preserve handover rules', async () => {
+  await withApi(async ({ request }) => {
+    const owner = (await request('/demo', { persona: 'owner' })).cookie;
+    const applicant = (await request('/demo', { persona: 'claimant' })).cookie;
+    const cid = (await request('/items/demo-bag/claims', { evidence: '包内一本黄色数学笔记' }, applicant)).body.id;
+    await request(`/claims/${cid}/review`, { decision: 'approved', note: '核对相符' }, owner);
+    assert.equal((await request(`/claims/${cid}/confirm`, {}, applicant)).body.item.status, 'claimed');
+    assert.equal((await request(`/claims/${cid}/confirm`, {}, applicant)).body.item.status, 'claimed');
+    assert.equal((await request(`/claims/${cid}/confirm`, {}, owner)).body.item.status, 'returned');
+    assert.equal((await request(`/claims/${cid}/confirm`, {}, owner)).body.item.status, 'returned');
+  });
+});
+
+test('A08: overlapping approvals select exactly one active claimant', async () => {
+  await withApi(async ({ db, request }) => {
+    const owner = (await request('/demo', { persona: 'owner' })).cookie;
+    const first = (await request('/demo', { persona: 'claimant' })).cookie;
+    const second = (await request('/register', { name: '第二申请人', email: 'second-alpha@example.test', password: 'alpha-pass-123' })).cookie;
+    const a = (await request('/items/demo-bag/claims', { evidence: '包内一本黄色数学笔记' }, first)).body.id;
+    const b = (await request('/items/demo-bag/claims', { evidence: '包内一本红色数学笔记' }, second)).body.id;
+    const results = await Promise.all([a, b].map(cid => request(`/claims/${cid}/review`, { decision: 'approved', note: '核对相符' }, owner)));
+    assert.deepEqual(results.map(x => x.status).sort(), [200, 409]);
+    const rows = await db.prepare('SELECT id,status FROM claims WHERE item_id=?').bind('demo-bag').all();
+    assert.equal(rows.results.filter(x => x.status === 'approved').length, 1);
+    assert.equal(rows.results.filter(x => x.status === 'rejected').length, 1);
+    const item = await db.prepare('SELECT active_claim_id FROM items WHERE id=?').bind('demo-bag').first();
+    assert.equal(item.active_claim_id, rows.results.find(x => x.status === 'approved').id);
+  });
+});
+
+test('A08: an approved handover cannot be closed or reviewed again', async () => {
+  await withApi(async ({ request }) => {
+    const owner = (await request('/demo', { persona: 'owner' })).cookie;
+    const applicant = (await request('/demo', { persona: 'claimant' })).cookie;
+    const cid = (await request('/items/demo-bag/claims', { evidence: '包内一本黄色数学笔记' }, applicant)).body.id;
+    await request(`/claims/${cid}/review`, { decision: 'approved', note: '核对相符' }, owner);
+    assert.equal((await request('/items/demo-bag/close', {}, owner)).status, 409);
+    assert.equal((await request(`/claims/${cid}/review`, { decision: 'rejected', note: '再次操作' }, owner)).status, 409);
+    assert.equal((await request('/items/demo-bag')).body.item.status, 'claimed');
+  });
+});
