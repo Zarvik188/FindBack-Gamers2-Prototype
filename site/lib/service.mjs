@@ -107,7 +107,8 @@ export async function handleApi(request, env) {
       const q = (url.searchParams.get('q') || '').slice(0, 100);
       if (q) { where.push("(i.title LIKE ? ESCAPE '\\' OR i.description LIKE ? ESCAPE '\\')"); const like = `%${q.replace(/[\\%_]/g, '\\$&')}%`; args.push(like, like); }
       if (url.searchParams.get('mine') === '1') { requireUser(); where.splice(0, 1); where.push('i.owner_id=?'); args.push(me.id); }
-      const page = Math.max(1, Math.min(10000, Number(url.searchParams.get('page')) || 1));
+      const requestedPage = Number(url.searchParams.get('page'));
+      const page = Number.isFinite(requestedPage) ? Math.max(1, Math.min(10000, Math.floor(requestedPage))) : 1;
       const count = await db.prepare(`SELECT count(*) AS total FROM items i WHERE ${where.join(' AND ')}`).bind(...args).first();
       const rows = await db.prepare(`SELECT i.*,u.name AS owner_name FROM items i JOIN users u ON u.id=i.owner_id WHERE ${where.join(' AND ')} ORDER BY i.created_at DESC, i.id LIMIT 12 OFFSET ?`).bind(...args, (page - 1) * 12).all();
       return json({ items: rows.results.map(publicItem), total: count.total, page, page_size: 12 });

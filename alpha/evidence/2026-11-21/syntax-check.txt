@@ -1,0 +1,4 @@
+
+> findback-gamers2@1.0.0 check
+> node --check backend/service.mjs && node --check backend/server.mjs && node --check backend/database.mjs && node --check frontend/app.js
+

@@ -1,0 +1,166 @@
+TAP version 13
+# Subtest: A02: fractional pagination is normalized rather than causing a database error
+ok 1 - A02: fractional pagination is normalized rather than causing a database error
+  ---
+  duration_ms: 26.1544
+  type: 'test'
+  ...
+# Subtest: A02: pagination rejects nonfinite values by falling back to page one
+ok 2 - A02: pagination rejects nonfinite values by falling back to page one
+  ---
+  duration_ms: 3.519
+  type: 'test'
+  ...
+# Subtest: A03: standard mode disables all demo identities and reports its mode
+ok 3 - A03: standard mode disables all demo identities and reports its mode
+  ---
+  duration_ms: 1.2045
+  type: 'test'
+  ...
+# Subtest: A03: expired sessions lose access to private resources
+ok 4 - A03: expired sessions lose access to private resources
+  ---
+  duration_ms: 3.3423
+  type: 'test'
+  ...
+# Subtest: A03: JSON arrays, primitive bodies and wrong media types fail predictably
+ok 5 - A03: JSON arrays, primitive bodies and wrong media types fail predictably
+  ---
+  duration_ms: 1.9844
+  type: 'test'
+  ...
+# Subtest: A03: oversized API bodies are rejected before business processing
+ok 6 - A03: oversized API bodies are rejected before business processing
+  ---
+  duration_ms: 2.2831
+  type: 'test'
+  ...
+# Subtest: A03: a third party cannot inspect evidence or confirm another handover
+ok 7 - A03: a third party cannot inspect evidence or confirm another handover
+  ---
+  duration_ms: 20.6763
+  type: 'test'
+  ...
+# Subtest: A03: a failed batch rolls back every write in the transaction
+ok 8 - A03: a failed batch rolls back every write in the transaction
+  ---
+  duration_ms: 1.6629
+  type: 'test'
+  ...
+# Subtest: 匿名不能发布或读取他人的通知
+ok 9 - 匿名不能发布或读取他人的通知
+  ---
+  duration_ms: 20.911
+  type: 'test'
+  ...
+# Subtest: 演示数据可重复初始化且不会产生重复物品
+ok 10 - 演示数据可重复初始化且不会产生重复物品
+  ---
+  duration_ms: 7.332
+  type: 'test'
+  ...
+# Subtest: 公开列表与详情不暴露核验参考、账号邮箱和密码
+ok 11 - 公开列表与详情不暴露核验参考、账号邮箱和密码
+  ---
+  duration_ms: 2.4065
+  type: 'test'
+  ...
+# Subtest: 关键词、分类、地点、类型、空结果可组合检索
+ok 12 - 关键词、分类、地点、类型、空结果可组合检索
+  ---
+  duration_ms: 2.6956
+  type: 'test'
+  ...
+# Subtest: 发布先保存为待审核，发布者可见，公众不可见
+ok 13 - 发布先保存为待审核，发布者可见，公众不可见
+  ---
+  duration_ms: 3.5914
+  type: 'test'
+  ...
+# Subtest: 普通用户不能审核帖子，管理员审核后公开并发通知
+ok 14 - 普通用户不能审核帖子，管理员审核后公开并发通知
+  ---
+  duration_ms: 4.0292
+  type: 'test'
+  ...
+# Subtest: 帖子字段、未来日期、联系方式和非法图片校验
+ok 15 - 帖子字段、未来日期、联系方式和非法图片校验
+  ---
+  duration_ms: 3.0366
+  type: 'test'
+  ...
+# Subtest: 只有拾物开放帖子可认领，不能认领自己的
+ok 16 - 只有拾物开放帖子可认领，不能认领自己的
+  ---
+  duration_ms: 2.4908
+  type: 'test'
+  ...
+# Subtest: 认领申请去重，私密证据只有申请者和拾主可见
+ok 17 - 认领申请去重，私密证据只有申请者和拾主可见
+  ---
+  duration_ms: 4.2397
+  type: 'test'
+  ...
+# Subtest: 只有拾主可核验，未经核验不能确认交接
+ok 18 - 只有拾主可核验，未经核验不能确认交接
+  ---
+  duration_ms: 3.5638
+  type: 'test'
+  ...
+# Subtest: 双方确认才结案，单方确认和重复点击不提前结案
+ok 19 - 双方确认才结案，单方确认和重复点击不提前结案
+  ---
+  duration_ms: 5.2958
+  type: 'test'
+  ...
+# Subtest: 同时认领只能一人通过核验
+ok 20 - 同时认领只能一人通过核验
+  ---
+  duration_ms: 17.5104
+  type: 'test'
+  ...
+# Subtest: 拒绝申请有原因并通知申请人，可重新补证申请
+ok 21 - 拒绝申请有原因并通知申请人，可重新补证申请
+  ---
+  duration_ms: 2.7826
+  type: 'test'
+  ...
+# Subtest: 通知按用户隔离，标已读不影响他人
+ok 22 - 通知按用户隔离，标已读不影响他人
+  ---
+  duration_ms: 2.804
+  type: 'test'
+  ...
+# Subtest: 账号密码哈希、登录、退出与会话有效性
+ok 23 - 账号密码哈希、登录、退出与会话有效性
+  ---
+  duration_ms: 43.108
+  type: 'test'
+  ...
+# Subtest: 跨源写入拒绝，JSON 类型和格式验证
+ok 24 - 跨源写入拒绝，JSON 类型和格式验证
+  ---
+  duration_ms: 1.1454
+  type: 'test'
+  ...
+# Subtest: 关闭物品后的认领结束，不能跨用户关闭
+ok 25 - 关闭物品后的认领结束，不能跨用户关闭
+  ---
+  duration_ms: 2.8361
+  type: 'test'
+  ...
+# Subtest: 数据库重开后已发布的数据仍存在
+ok 26 - 数据库重开后已发布的数据仍存在
+  ---
+  duration_ms: 101.0165
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 307.859

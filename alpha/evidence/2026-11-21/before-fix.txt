@@ -1,0 +1,8 @@
+Observed on 2026-11-21, Node.js v24.18.0, Windows.
+Command: node --test tests/alpha.test.mjs
+Baseline source: 6cca27683c353d6a60f9bc3ee4e2e044d4ce9d13
+Summary of actual tool output (not the full raw log):
+  tests 8; pass 6; fail 2
+  page=1.1: expected 200, actual 500; SQLite datatype mismatch
+  page=Infinity: expected normalized page 1, actual page 10000
+The nonfinite fallback is the new Alpha contract; the fractional 500 is the reproduced defect.

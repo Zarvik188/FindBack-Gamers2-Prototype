@@ -1,0 +1,21 @@
+name: FindBack Alpha checks
+on:
+  push:
+    paths: ['backend/**', 'frontend/**', 'tests/**', 'package.json', '.github/workflows/alpha-tests.yml']
+  pull_request:
+    paths: ['backend/**', 'frontend/**', 'tests/**', 'package.json', '.github/workflows/alpha-tests.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check syntax
+        run: npm run check
+      - name: Run isolated API tests
+        run: npm test
