@@ -1,0 +1,16 @@
+{
+  "head_sha": "7b2b89a1851f8f2d42da78584f28a02967316a62",
+  "run_id": 45847696688,
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/Zarvik188/FindBack-Gamers2-Prototype/actions/runs/45847696688",
+  "automated_tests": 30,
+  "passed": 30,
+  "environment": "ubuntu-latest, Node 24",
+  "previous_run": {
+    "id": 45847032390,
+    "conclusion": "failure",
+    "cause": "Node patch versions differ in TypeScript handling under --check",
+    "resolution": "strip types using node:module before checking the resulting JavaScript module"
+  }
+}
