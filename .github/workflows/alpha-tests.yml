@@ -1,9 +1,9 @@
 name: FindBack Alpha checks
 on:
   push:
-    paths: ['backend/**', 'frontend/**', 'tests/**', 'package.json', '.github/workflows/alpha-tests.yml']
+    paths: ['backend/**', 'frontend/**', 'scripts/prepare-site.mjs', 'tests/**', 'package.json', '.github/workflows/alpha-tests.yml']
   pull_request:
-    paths: ['backend/**', 'frontend/**', 'tests/**', 'package.json', '.github/workflows/alpha-tests.yml']
+    paths: ['backend/**', 'frontend/**', 'scripts/prepare-site.mjs', 'tests/**', 'package.json', '.github/workflows/alpha-tests.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,5 +17,5 @@ jobs:
           node-version: '24'
       - name: Check syntax
         run: npm run check
-      - name: Run isolated API tests
+      - name: Run isolated automated tests
         run: npm test

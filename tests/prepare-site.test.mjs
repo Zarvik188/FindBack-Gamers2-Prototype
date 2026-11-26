@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
+import { stripTypeScriptTypes } from 'node:module';
 
 test('A09: deployment preparation emits parseable routes and preserves the supplied project identity', t => {
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'findback-prepare-'));
@@ -24,7 +25,10 @@ test('A09: deployment preparation emits parseable routes and preserves the suppl
   const generated = fs.readFileSync(route, 'utf8');
   assert.ok(generated.includes('\nexport function GET'), 'Generated code must contain actual line breaks');
   assert.ok(!generated.includes('\\n'), 'Literal backslash-n must not escape into the TypeScript source');
-  const syntax = spawnSync(process.execPath, ['--check', route], { encoding: 'utf8' });
+  // TypeScript support in --check varies by Node patch version. Strip types
+  // through Node's parser, then check the resulting module without loading it.
+  const javascript = stripTypeScriptTypes(generated);
+  const syntax = spawnSync(process.execPath, ['--check', '--input-type=module'], { input: javascript, encoding: 'utf8' });
   assert.equal(syntax.status, 0, syntax.stderr);
   for (const name of ['page.tsx', 'layout.tsx']) assert.ok(!fs.readFileSync(path.join(fixture, 'site/app', name), 'utf8').includes('\\n'));
   assert.deepEqual(JSON.parse(fs.readFileSync(path.join(fixture, 'site/.openai/hosting.json'), 'utf8')), { project_id: 'fixture-only-not-a-real-site', keep: 'preserved', d1: 'DB' });
