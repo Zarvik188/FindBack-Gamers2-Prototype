@@ -1,0 +1,40 @@
+{
+  "observedAt": "2026-11-26T15:05:05.311Z",
+  "timezone": "Asia/Shanghai",
+  "tool": "Playwright Library",
+  "engine": "firefox",
+  "browserVersion": "153.0",
+  "viewport": "1440x1040 and 390x844",
+  "checks": [
+    {
+      "name": "Desktop catalogue contains six seeded items",
+      "status": "passed"
+    },
+    {
+      "name": "Empty search gives an explicit message",
+      "status": "passed"
+    },
+    {
+      "name": "Claim appears in applicant view",
+      "status": "passed"
+    },
+    {
+      "name": "One confirmation keeps item in handover",
+      "status": "passed"
+    },
+    {
+      "name": "Two confirmations mark item returned",
+      "status": "passed"
+    },
+    {
+      "name": "390px home viewport has no horizontal overflow",
+      "status": "passed"
+    }
+  ],
+  "pageErrors": [],
+  "limitations": [
+    "One selected engine per report; combine engine reports for cross-browser evidence",
+    "Seeded teaching identities and isolated temporary SQLite database",
+    "No campus deployment, load test, user study or security audit"
+  ]
+}

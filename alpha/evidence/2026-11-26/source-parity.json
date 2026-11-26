@@ -1,0 +1,73 @@
+{
+  "observedDate": "2026-11-26",
+  "comparedFiles": 11,
+  "results": [
+    {
+      "local": "backend/service.mjs",
+      "deploymentSource": "site/lib/service.mjs",
+      "sha256": "f2e133cbc9d84b3f0551c1ef627181db455e7fbde33b6a1da3235615b27549d4",
+      "equal": true
+    },
+    {
+      "local": "frontend/index.html",
+      "deploymentSource": "site/public/index.html",
+      "sha256": "b12317f341eee5ec35080eba618c7f852ca2fc07acd2fa30583f81d8ecd471fd",
+      "equal": true
+    },
+    {
+      "local": "frontend/app.js",
+      "deploymentSource": "site/public/app.js",
+      "sha256": "4238416288e721d5323455815310f91b1412cf96beec22137f1855dd7252cf0e",
+      "equal": true
+    },
+    {
+      "local": "frontend/style.css",
+      "deploymentSource": "site/public/style.css",
+      "sha256": "36f9d6e2755a1447bca68d515df79e8bda9784018b36c938d2942a55548e8184",
+      "equal": true
+    },
+    {
+      "local": "frontend/favicon.svg",
+      "deploymentSource": "site/public/favicon.svg",
+      "sha256": "c41c8770268a5be70d4c6d2c37e67d193bd0dac8e7c34b0a44cb0536f9a32838",
+      "equal": true
+    },
+    {
+      "local": "frontend/images/bag.jpg",
+      "deploymentSource": "site/public/images/bag.jpg",
+      "sha256": "c4f9ac874458300d1c267afb1c99c276efe0194c0ccf553c199b6bcfefdf4824",
+      "equal": true
+    },
+    {
+      "local": "frontend/images/book.jpg",
+      "deploymentSource": "site/public/images/book.jpg",
+      "sha256": "e14fc1a42544ffebf7b412e6661245b878b3e0dd2da18254d9beed3c7aef718e",
+      "equal": true
+    },
+    {
+      "local": "frontend/images/cup.jpg",
+      "deploymentSource": "site/public/images/cup.jpg",
+      "sha256": "000348fed0c96afe8460cdf76e8cf8a3b156dde7aaa0fc12219f91ddc06c7b6b",
+      "equal": true
+    },
+    {
+      "local": "frontend/images/headphones.jpg",
+      "deploymentSource": "site/public/images/headphones.jpg",
+      "sha256": "195223133206a2d5ed57c318fc0917e0c6bd93d8d439e3a7b3ac73ea116549ec",
+      "equal": true
+    },
+    {
+      "local": "frontend/images/keys.jpg",
+      "deploymentSource": "site/public/images/keys.jpg",
+      "sha256": "71a3d853af0ec2d0bea8b060f042624fbed19f999ffd49be4d77a50c56d124ac",
+      "equal": true
+    },
+    {
+      "local": "frontend/images/umbrella.jpg",
+      "deploymentSource": "site/public/images/umbrella.jpg",
+      "sha256": "68081cf17dfadc5f1ea25a2276c854035564cd964a8f810229dbb3529ed55b6b",
+      "equal": true
+    }
+  ],
+  "claim": "Byte-for-byte source equality only. This does not verify the running cloud deployment."
+}

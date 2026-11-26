@@ -1,0 +1,49 @@
+{
+  "observedAt": "2026-11-26T15:02:07.606Z",
+  "tool": "Playwright Library",
+  "engine": "chromium",
+  "browser": "158.0.4370.33",
+  "checks": [
+    {
+      "name": "Keyboard opens login and Escape closes the modal",
+      "result": "passed"
+    },
+    {
+      "name": "Required title field blocks empty submission in the browser",
+      "result": "passed"
+    },
+    {
+      "name": "Publication remains pending before content moderation",
+      "result": "passed"
+    },
+    {
+      "name": "Rejected content is absent from the anonymous catalogue",
+      "result": "passed"
+    },
+    {
+      "name": "Publisher receives the actual moderation rejection reason",
+      "result": "passed"
+    },
+    {
+      "name": "Fresh claimant has an explicit empty-message state",
+      "result": "passed"
+    },
+    {
+      "name": "390px publication form has no horizontal overflow",
+      "result": "passed"
+    },
+    {
+      "name": "390px item detail has no horizontal overflow",
+      "result": "passed"
+    },
+    {
+      "name": "Expired browser session shows a fresh login action and explicit error",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "Execution timestamp is the actual observation date",
+    "One selected engine per report",
+    "No campus production or load test"
+  ]
+}

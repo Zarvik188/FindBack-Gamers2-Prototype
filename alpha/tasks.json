@@ -107,11 +107,27 @@
     "points": 3,
     "target": "2026-11-27",
     "owners": "Zhou Shengdong / Xu Yichao / Liu Junye",
-    "status": "planned",
+    "status": "partial",
     "scope": "复核第二浏览器、全新数据库运行和云端与本地版本一致性。",
     "acceptance": "记录浏览器版本、环境与结果。未具备的云端验证明确未测。",
     "issue": "https://github.com/Zarvik188/FindBack-Gamers2-Prototype/issues/9",
-    "issue_number": 9
+    "issue_number": 9,
+    "accepted_points": 2,
+    "observed_date": "2026-11-26",
+    "evidence": "evidence/2026-11-26/acceptance-summary.json",
+    "remaining": "1 SP: verify the live cloud deployment; current Site unavailable",
+    "subchecks": [
+      {
+        "name": "Second browser, clean release and source parity",
+        "points": 2,
+        "status": "done"
+      },
+      {
+        "name": "Live cloud runtime parity",
+        "points": 1,
+        "status": "unverified"
+      }
+    ]
   },
   {
     "id": "A10",
@@ -135,7 +151,8 @@
     "scope": "11/22、24、26、28 分别完成对应双日记录。",
     "acceptance": "每篇附当期燃起图、最新运行画面及每人 Issue/提交或具体成果。",
     "issue": "https://github.com/Zarvik188/FindBack-Gamers2-Prototype/issues/11",
-    "issue_number": 11
+    "issue_number": 11,
+    "stage": "Third log and current evidence prepared on 11/26; formal publication links not recorded"
   },
   {
     "id": "A12",

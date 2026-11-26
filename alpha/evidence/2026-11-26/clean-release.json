@@ -1,0 +1,43 @@
+{
+  "observedAt": "2026-11-26T15:03:02.819Z",
+  "sourceCommit": "d1b30b3730ce29bc5b0bdecfded2e128e996648a",
+  "node": "v24.18.0",
+  "mode": "standard",
+  "source": "git archive of tracked runnable files",
+  "dependenciesInstalled": false,
+  "checks": [
+    {
+      "name": "Clean release has no node_modules or existing SQLite data",
+      "result": "passed"
+    },
+    {
+      "name": "Standard mode starts against an automatically created empty database",
+      "result": "passed"
+    },
+    {
+      "name": "Demo admin cannot be selected when DEMO_MODE is false",
+      "result": "passed"
+    },
+    {
+      "name": "HTML, JS, CSS and example image are served by the clean package",
+      "result": "passed"
+    },
+    {
+      "name": "New account publication persists as pending and stays hidden from anonymous users",
+      "result": "passed"
+    },
+    {
+      "name": "Service restart retains account, item and its moderation state",
+      "result": "passed"
+    },
+    {
+      "name": "HTTP service does not expose backend source as a static asset",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "Local clean release only",
+    "No production cloud deployment or backup/recovery drill",
+    "Synthetic account and isolated temporary database"
+  ]
+}

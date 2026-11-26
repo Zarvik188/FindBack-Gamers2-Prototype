@@ -1,0 +1,184 @@
+TAP version 13
+# Subtest: A02: fractional pagination is normalized rather than causing a database error
+ok 1 - A02: fractional pagination is normalized rather than causing a database error
+  ---
+  duration_ms: 29.509
+  type: 'test'
+  ...
+# Subtest: A02: pagination rejects nonfinite values by falling back to page one
+ok 2 - A02: pagination rejects nonfinite values by falling back to page one
+  ---
+  duration_ms: 4.8215
+  type: 'test'
+  ...
+# Subtest: A03: standard mode disables all demo identities and reports its mode
+ok 3 - A03: standard mode disables all demo identities and reports its mode
+  ---
+  duration_ms: 2.0843
+  type: 'test'
+  ...
+# Subtest: A03: expired sessions lose access to private resources
+ok 4 - A03: expired sessions lose access to private resources
+  ---
+  duration_ms: 4.0236
+  type: 'test'
+  ...
+# Subtest: A03: JSON arrays, primitive bodies and wrong media types fail predictably
+ok 5 - A03: JSON arrays, primitive bodies and wrong media types fail predictably
+  ---
+  duration_ms: 2.6762
+  type: 'test'
+  ...
+# Subtest: A03: oversized API bodies are rejected before business processing
+ok 6 - A03: oversized API bodies are rejected before business processing
+  ---
+  duration_ms: 2.9827
+  type: 'test'
+  ...
+# Subtest: A03: a third party cannot inspect evidence or confirm another handover
+ok 7 - A03: a third party cannot inspect evidence or confirm another handover
+  ---
+  duration_ms: 21.6846
+  type: 'test'
+  ...
+# Subtest: A03: a failed batch rolls back every write in the transaction
+ok 8 - A03: a failed batch rolls back every write in the transaction
+  ---
+  duration_ms: 2.0231
+  type: 'test'
+  ...
+# Subtest: A08: applicant-first confirmation and repeat confirmations preserve handover rules
+ok 9 - A08: applicant-first confirmation and repeat confirmations preserve handover rules
+  ---
+  duration_ms: 5.5235
+  type: 'test'
+  ...
+# Subtest: A08: overlapping approvals select exactly one active claimant
+ok 10 - A08: overlapping approvals select exactly one active claimant
+  ---
+  duration_ms: 18.5657
+  type: 'test'
+  ...
+# Subtest: A08: an approved handover cannot be closed or reviewed again
+ok 11 - A08: an approved handover cannot be closed or reviewed again
+  ---
+  duration_ms: 4.5359
+  type: 'test'
+  ...
+# Subtest: 匿名不能发布或读取他人的通知
+ok 12 - 匿名不能发布或读取他人的通知
+  ---
+  duration_ms: 22.5763
+  type: 'test'
+  ...
+# Subtest: 演示数据可重复初始化且不会产生重复物品
+ok 13 - 演示数据可重复初始化且不会产生重复物品
+  ---
+  duration_ms: 8.5354
+  type: 'test'
+  ...
+# Subtest: 公开列表与详情不暴露核验参考、账号邮箱和密码
+ok 14 - 公开列表与详情不暴露核验参考、账号邮箱和密码
+  ---
+  duration_ms: 3.3351
+  type: 'test'
+  ...
+# Subtest: 关键词、分类、地点、类型、空结果可组合检索
+ok 15 - 关键词、分类、地点、类型、空结果可组合检索
+  ---
+  duration_ms: 3.745
+  type: 'test'
+  ...
+# Subtest: 发布先保存为待审核，发布者可见，公众不可见
+ok 16 - 发布先保存为待审核，发布者可见，公众不可见
+  ---
+  duration_ms: 4.2704
+  type: 'test'
+  ...
+# Subtest: 普通用户不能审核帖子，管理员审核后公开并发通知
+ok 17 - 普通用户不能审核帖子，管理员审核后公开并发通知
+  ---
+  duration_ms: 4.9284
+  type: 'test'
+  ...
+# Subtest: 帖子字段、未来日期、联系方式和非法图片校验
+ok 18 - 帖子字段、未来日期、联系方式和非法图片校验
+  ---
+  duration_ms: 3.7862
+  type: 'test'
+  ...
+# Subtest: 只有拾物开放帖子可认领，不能认领自己的
+ok 19 - 只有拾物开放帖子可认领，不能认领自己的
+  ---
+  duration_ms: 2.9353
+  type: 'test'
+  ...
+# Subtest: 认领申请去重，私密证据只有申请者和拾主可见
+ok 20 - 认领申请去重，私密证据只有申请者和拾主可见
+  ---
+  duration_ms: 4.611
+  type: 'test'
+  ...
+# Subtest: 只有拾主可核验，未经核验不能确认交接
+ok 21 - 只有拾主可核验，未经核验不能确认交接
+  ---
+  duration_ms: 3.6579
+  type: 'test'
+  ...
+# Subtest: 双方确认才结案，单方确认和重复点击不提前结案
+ok 22 - 双方确认才结案，单方确认和重复点击不提前结案
+  ---
+  duration_ms: 5.76
+  type: 'test'
+  ...
+# Subtest: 同时认领只能一人通过核验
+ok 23 - 同时认领只能一人通过核验
+  ---
+  duration_ms: 19.6814
+  type: 'test'
+  ...
+# Subtest: 拒绝申请有原因并通知申请人，可重新补证申请
+ok 24 - 拒绝申请有原因并通知申请人，可重新补证申请
+  ---
+  duration_ms: 4.0771
+  type: 'test'
+  ...
+# Subtest: 通知按用户隔离，标已读不影响他人
+ok 25 - 通知按用户隔离，标已读不影响他人
+  ---
+  duration_ms: 3.3447
+  type: 'test'
+  ...
+# Subtest: 账号密码哈希、登录、退出与会话有效性
+ok 26 - 账号密码哈希、登录、退出与会话有效性
+  ---
+  duration_ms: 44.8908
+  type: 'test'
+  ...
+# Subtest: 跨源写入拒绝，JSON 类型和格式验证
+ok 27 - 跨源写入拒绝，JSON 类型和格式验证
+  ---
+  duration_ms: 1.6497
+  type: 'test'
+  ...
+# Subtest: 关闭物品后的认领结束，不能跨用户关闭
+ok 28 - 关闭物品后的认领结束，不能跨用户关闭
+  ---
+  duration_ms: 3.9768
+  type: 'test'
+  ...
+# Subtest: 数据库重开后已发布的数据仍存在
+ok 29 - 数据库重开后已发布的数据仍存在
+  ---
+  duration_ms: 106.9197
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 332.0382

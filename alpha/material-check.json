@@ -1,16 +1,19 @@
 {
+  "date": "2026-11-26",
   "blogs": 8,
   "local_blog_links": "all resolved",
   "required_headers": "all present",
   "scope_sp": 32,
-  "actual_first_day_sp": 23,
+  "accepted_sp": 25,
   "future_actuals": "not populated",
   "api_cases": 29,
-  "browser_checks": 15,
-  "ci": "success",
+  "deployment_preparation_cases": 1,
+  "automated_total": 30,
+  "page_executions": 30,
+  "browser_engines": 2,
+  "clean_release_checks": 7,
   "presentation_slides": 12,
   "csdn_published": false,
   "course_submitted": false,
-  "manuscripts": "four complete stage drafts and full summary",
   "member_reflections": "role-based reference text awaiting member confirmation"
 }

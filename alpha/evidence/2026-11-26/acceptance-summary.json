@@ -1,0 +1,43 @@
+{
+  "observedDate": "2026-11-26",
+  "uniquePageScenarios": 15,
+  "browserCount": 2,
+  "pageExecutions": 30,
+  "pagePasses": 30,
+  "browsers": [
+    {
+      "browser": "edge",
+      "version": "158.0.4370.33",
+      "engine": "chromium",
+      "mainCases": 6,
+      "extendedCases": 9,
+      "total": 15,
+      "passed": 15,
+      "mainObservedAt": "2026-11-26T15:01:51.969Z",
+      "extendedObservedAt": "2026-11-26T15:02:07.606Z",
+      "mainReport": "edge/main/browser-report.json",
+      "extendedReport": "edge/extended/extended-ui-report.json"
+    },
+    {
+      "browser": "firefox",
+      "version": "153.0",
+      "engine": "firefox",
+      "mainCases": 6,
+      "extendedCases": 9,
+      "total": 15,
+      "passed": 15,
+      "mainObservedAt": "2026-11-26T15:05:05.311Z",
+      "extendedObservedAt": "2026-11-26T15:05:22.975Z",
+      "mainReport": "firefox/main/browser-report.json",
+      "extendedReport": "firefox/extended/extended-ui-report.json"
+    }
+  ],
+  "apiCases": 29,
+  "deploymentPreparationCases": 1,
+  "automatedTotal": 30,
+  "automatedPasses": 30,
+  "cleanReleaseChecks": 7,
+  "cleanReleasePassed": 7,
+  "sourceParityFiles": 11,
+  "cloudDeploymentVerified": false
+}

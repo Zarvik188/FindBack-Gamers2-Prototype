@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-26",
+  "apiCases": 29,
+  "deploymentPreparationCases": 1,
+  "automatedCases": 30,
+  "automatedPasses": 30,
+  "uniquePageScenarios": 15,
+  "browserEngines": 2,
+  "pageExecutions": 30,
+  "pagePasses": 30,
+  "cleanReleaseChecks": 7,
+  "acceptedPoints": 25,
+  "totalPoints": 32,
+  "A09": "partial",
+  "liveCloudVerified": false,
+  "formalBlogUrlsRecorded": false,
+  "courseSubmissionVerified": false,
+  "memberReflections": "reference draft, not member-confirmed",
+  "previousWechatDelivery": "2026-11-21 package sent to three destinations; updated package not yet sent"
+}

@@ -1,5 +1,5 @@
 // Run with FINDBACK_PLAYWRIGHT_MODULE pointing at an installed Playwright package.
-const { chromium, expect } = require(process.env.FINDBACK_PLAYWRIGHT_MODULE || 'playwright');
+const playwright = require(process.env.FINDBACK_PLAYWRIGHT_MODULE || 'playwright');
 const { spawn } = require('node:child_process');
 const fs = require('node:fs');
 const os = require('node:os');
@@ -8,14 +8,15 @@ const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '../..');
 const output = path.resolve(process.env.FINDBACK_CAPTURE_DIR || path.join(root, 'alpha/evidence/2026-11-21'));
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'findback-alpha-'));
-const port = 5187, url = `http://127.0.0.1:${port}`;
+const port = Number(process.env.FINDBACK_PORT || 5187), url = `http://127.0.0.1:${port}`;
 const server = spawn(process.execPath, ['backend/server.mjs'], { cwd: root, env: { ...process.env, PORT: String(port), FINDBACK_DB: path.join(temp, 'capture.db') }, windowsHide: true, stdio: 'pipe' });
 let browser;
 const checks = [], errors = [];
 async function main() {
   fs.mkdirSync(output, { recursive: true });
   await new Promise((resolve, reject) => { server.stdout.once('data', resolve); server.once('error', reject); server.once('exit', code => reject(new Error(`Server exited ${code}`))); });
-  browser = await chromium.launch({ headless: true, ...(process.env.FINDBACK_BROWSER_EXECUTABLE ? { executablePath: process.env.FINDBACK_BROWSER_EXECUTABLE } : {}) });
+  const engine = process.env.FINDBACK_BROWSER_ENGINE || 'chromium';
+  browser = await playwright[engine].launch({ headless: true, ...(process.env.FINDBACK_BROWSER_EXECUTABLE ? { executablePath: process.env.FINDBACK_BROWSER_EXECUTABLE } : {}) });
   const page = await browser.newPage({ viewport: { width: 1440, height: 1040 }, deviceScaleFactor: 1 });
   page.on('pageerror', error => errors.push(error.message));
   async function shot(name) { await page.screenshot({ path: path.join(output, name), fullPage: true }); }
@@ -60,7 +61,7 @@ async function main() {
   await check('390px home viewport has no horizontal overflow', async () => { assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)); });
   await shot('06-mobile.png');
   assert.deepEqual(errors, []);
-  const report = { observedAt: new Date().toISOString(), timezone: 'Asia/Shanghai', tool: 'Playwright Chromium', browserVersion: browser.version(), viewport: '1440x1040 and 390x844', checks, pageErrors: errors, limitations: ['Single local Chromium engine', 'Seeded teaching identities and isolated temporary SQLite database', 'No campus deployment, load test, user study or security audit'] };
+  const report = { observedAt: new Date().toISOString(), timezone: 'Asia/Shanghai', tool: 'Playwright Library', engine, browserVersion: browser.version(), viewport: '1440x1040 and 390x844', checks, pageErrors: errors, limitations: ['One selected engine per report; combine engine reports for cross-browser evidence', 'Seeded teaching identities and isolated temporary SQLite database', 'No campus deployment, load test, user study or security audit'] };
   fs.writeFileSync(path.join(output, 'browser-report.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 }

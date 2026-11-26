@@ -2,9 +2,9 @@
 
 校园失物招领课程演示。原型使用墨刀；实际系统包含独立前端、HTTP API 和 SQLite 持久化。
 
-## α 冲刺（2026-11-21 首日版）
+## α 冲刺（2026-11-26 更新）
 
-[α 博客与证据](alpha/README.md)、[8 篇正文](alpha/blogs/01_博客总目录.md)、[12 项任务](https://github.com/Zarvik188/FindBack-Gamers2-Prototype/issues)。本轮新增分页修复和 11 项接口回归，现有 29 项接口测试通过，另有 15 项真实页面检查。后续日志和最终总结须按各期实际记录补齐；尚未代发布 CSDN 或提交课程作业页。
+[α 博客与证据](alpha/README.md)、[8 篇正文](alpha/blogs/01_博客总目录.md)、[12 项任务](https://github.com/Zarvik188/FindBack-Gamers2-Prototype/issues)。现有 29 项接口及 1 项部署准备回归共 30 项通过，Edge 与 Firefox 各 15 项页面通过，干净源码包 7 项通过。后续日志和最终总结须按各期实际记录补齐；尚未代发布 CSDN 或提交课程作业页。
 
 ## 作业与公开附件
 
@@ -38,7 +38,7 @@ npm start
 npm test
 ```
 
-29 项接口测试覆盖权限、私密字段、审核、交接、会话、输入边界和持久化，使用独立数据库。当前结果见 `alpha/evidence/2026-11-21/extended/api-tests-29.tap`；`docs/test-results.txt` 保留原型阶段 18 项结果。另有 15 项页面检查通过。这不是压力测试或校园实地试点报告。
+29 项接口测试覆盖权限、私密字段、审核、交接、会话、输入边界和持久化，使用独立数据库。当前结果见 `alpha/evidence/2026-11-21/extended/api-tests-29.tap`；`docs/test-results.txt` 保留原型阶段 18 项结果。另有 15 种页面场景在 Edge、Firefox 各通过一次；部署准备回归 1 项通过，自动测试共 30 项。这不是压力测试或校园实地试点报告。
 
 ## 功能与技术
 

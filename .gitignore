@@ -20,3 +20,8 @@ site/.openai/
 *.key
 *.log
 __pycache__/
+
+.tools/
+alpha/.export/
+alpha/.history/
+alpha/.build*/

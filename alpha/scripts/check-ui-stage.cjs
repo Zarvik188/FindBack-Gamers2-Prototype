@@ -1,13 +1,15 @@
-const {chromium}=require(process.env.FINDBACK_PLAYWRIGHT_MODULE);
+const playwright=require(process.env.FINDBACK_PLAYWRIGHT_MODULE || 'playwright');
 const {spawn}=require('node:child_process');
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
-const root=path.resolve(__dirname,'../..'),out=path.join(root,'alpha/evidence/2026-11-21/extended');fs.mkdirSync(out,{recursive:true});
+const root=path.resolve(__dirname,'../..'),out=path.resolve(process.env.FINDBACK_CAPTURE_DIR || path.join(root,'alpha/evidence/2026-11-21/extended'));fs.mkdirSync(out,{recursive:true});
 const temp=fs.mkdtempSync(path.join(os.tmpdir(),'findback-ui-'));
-const server=spawn(process.execPath,['backend/server.mjs'],{cwd:root,env:{...process.env,PORT:'5188',FINDBACK_DB:path.join(temp,'test.db')},windowsHide:true,stdio:'pipe'});
+const port=Number(process.env.FINDBACK_PORT || 5188);
+const server=spawn(process.execPath,['backend/server.mjs'],{cwd:root,env:{...process.env,PORT:String(port),FINDBACK_DB:path.join(temp,'test.db')},windowsHide:true,stdio:'pipe'});
 let browser;const checks=[];
 async function main(){
  await new Promise((ok,no)=>{server.stdout.once('data',ok);server.once('error',no)});
- browser=await chromium.launch({headless:true,executablePath:process.env.FINDBACK_BROWSER_EXECUTABLE});const page=await browser.newPage({viewport:{width:1440,height:1000}});const base='http://127.0.0.1:5188';
+ const engine=process.env.FINDBACK_BROWSER_ENGINE || 'chromium';
+ browser=await playwright[engine].launch({headless:true,...(process.env.FINDBACK_BROWSER_EXECUTABLE?{executablePath:process.env.FINDBACK_BROWSER_EXECUTABLE}:{})});const page=await browser.newPage({viewport:{width:1440,height:1000}});const base=`http://127.0.0.1:${port}`;
  const check=async(name,fn)=>{await fn();checks.push({name,result:'passed'});};
  const role=async(persona)=>{await page.locator('[data-action="auth"]').first().click();await page.locator(`[data-persona="${persona}"]`).click();await page.locator('#auth-dialog').waitFor({state:'hidden'});};
  const shot=async(name)=>{await page.locator('#toast.visible').waitFor({state:'hidden'});await page.screenshot({path:path.join(out,name),fullPage:true});};
@@ -27,6 +29,6 @@ async function main(){
  await page.goto(base+'/#/item/demo-bag');await page.getByRole('heading',{name:'图书馆捡到一个绿色双肩包',exact:true}).waitFor();await check('390px item detail has no horizontal overflow',async()=>assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)));await shot('11-mobile-detail.png');
  const {DatabaseSync}=require('node:sqlite');const fixture=new DatabaseSync(path.join(temp,'test.db'));fixture.exec("UPDATE sessions SET expires_at='2000-01-01T00:00:00.000Z'");fixture.close();
  await page.goto(base+'/#/messages');await check('Expired browser session shows a fresh login action and explicit error',async()=>{await page.getByText('请先登录后再操作',{exact:true}).waitFor();await page.getByRole('button',{name:'登录 / 演示身份 ↗',exact:true}).waitFor();});await shot('12-expired-session.png');
- const report={observedAt:new Date().toISOString(),tool:'Playwright Library + installed Microsoft Edge',browser:browser.version(),checks,limitations:['All checks executed on 2026-11-21, not future log dates','One Chromium-based browser only','No campus production or load test']};fs.writeFileSync(path.join(out,'extended-ui-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+ const report={observedAt:new Date().toISOString(),tool:'Playwright Library',engine,browser:browser.version(),checks,limitations:['Execution timestamp is the actual observation date','One selected engine per report','No campus production or load test']};fs.writeFileSync(path.join(out,'extended-ui-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));
 }
 main().catch(e=>{console.error(e);process.exitCode=1}).finally(async()=>{if(browser)await browser.close();server.kill()});

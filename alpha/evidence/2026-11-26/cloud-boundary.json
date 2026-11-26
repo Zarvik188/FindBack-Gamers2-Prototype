@@ -1,0 +1,7 @@
+{
+  "observedDate": "2026-11-26",
+  "liveDeploymentVerified": false,
+  "currentConnectorResult": "Sites project not found for the existing stored project identifier",
+  "publicHealthRequest": "Connection reset before an application response",
+  "conclusion": "Current cloud deployment could not be verified; source equality and local clean-package checks are separate results."
+}
